@@ -26,7 +26,6 @@ gem 'devise'
 # omniauth for discord
 gem 'omniauth-discord'
 gem 'omniauth-rails_csrf_protection'
-gem 'open-uri'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
