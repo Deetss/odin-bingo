@@ -6,7 +6,7 @@
     <%= image_tag @user.image %>
     <p><%= @user.name %></p>
     <%= link_to 'boards', boards_path %>
-    <%= link_to 'squares', squares_path %>
+    <%= link_to 'phrases', phrases_path %>
 <% else %>
     <%= link_to 'Sign In', new_user_session_path %>
 <% end %>
