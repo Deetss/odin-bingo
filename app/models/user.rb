@@ -4,12 +4,11 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and 
   has_one_attached :image
-  has_many :boards
+  has_many :boards, dependent: :delete_all
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   devise :omniauthable, omniauth_providers: %i[discord]
   
-
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       image = open(auth.info.image)

@@ -3,7 +3,12 @@ class BoardsController < ApplicationController
 
   # GET /boards or /boards.json
   def index
-    @boards = Board.all
+    if user_is_admin?
+      @boards = Board.all
+    else
+      @boards = current_user.boards
+    end
+    
   end
 
   # GET /boards/1 or /boards/1.json
@@ -13,6 +18,7 @@ class BoardsController < ApplicationController
   # GET /boards/new
   def new
     @board = Board.new
+    @user_id = current_user.id
   end
 
   # GET /boards/1/edit
@@ -64,6 +70,6 @@ class BoardsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def board_params
-      params.fetch(:board, {})
+      params.require(:board).permit(:user_id)
     end
 end

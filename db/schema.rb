@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_05_205619) do
+ActiveRecord::Schema.define(version: 2021_11_19_212824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2021_11_05_205619) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "squares", default: [], array: true
     t.index ["user_id"], name: "index_boards_on_user_id"
   end
 
@@ -55,6 +56,16 @@ ActiveRecord::Schema.define(version: 2021_11_05_205619) do
     t.string "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "squares", force: :cascade do |t|
+    t.bigint "board_id", null: false
+    t.bigint "phrase_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["board_id"], name: "index_squares_on_board_id"
+    t.index ["phrase_id"], name: "index_squares_on_phrase_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -68,6 +79,7 @@ ActiveRecord::Schema.define(version: 2021_11_05_205619) do
     t.string "provider"
     t.string "uid"
     t.string "name"
+    t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -75,4 +87,6 @@ ActiveRecord::Schema.define(version: 2021_11_05_205619) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "boards", "users"
+  add_foreign_key "squares", "boards"
+  add_foreign_key "squares", "phrases"
 end

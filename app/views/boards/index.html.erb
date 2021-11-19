@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Boards</h1>
+<% if user_is_admin? %>
+  <h1>All Boards</h1>
+<% else %>
+  <h1>My Boards</h1>
+<% end %>
 
 <table>
   <thead>
@@ -12,6 +16,8 @@
   <tbody>
     <% @boards.each do |board| %>
       <tr>
+        <td><p>Board #: <%= board.id %></p></td>
+        <td><p><%= board.user.name %></p></td>
         <td><%= link_to 'Show', board %></td>
         <td><%= link_to 'Edit', edit_board_path(board) %></td>
         <td><%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -11,6 +11,17 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+        <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+        <%= image_tag current_user.image unless current_user.image %>
+        <p><%= current_user.name %></p>
+        <%= link_to 'boards', boards_path %>
+        <%= link_to 'phrases', phrases_path if user_is_admin?%>
+        <%= link_to 'users', users_path if user_is_admin?%>
+    <% else %>
+        <%= link_to 'Sign In', new_user_session_path %>
+        <%= link_to 'Sign Up', new_user_registration_path %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

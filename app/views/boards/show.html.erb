@@ -1,4 +1,9 @@
 <p id="notice"><%= notice %></p>
+<% if @board.squares %>
+    <% @board.squares.each do |square| %>
+        <p><%= square.phrase.content %></p>
+    <% end %>
+<% end %>
 
 <%= link_to 'Edit', edit_board_path(@board) %> |
 <%= link_to 'Back', boards_path %>
