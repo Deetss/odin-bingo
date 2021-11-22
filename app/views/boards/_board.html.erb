@@ -1,0 +1,9 @@
+<div class="bingo-container">
+    <% if @board.squares %>
+        <% @board.squares.each do |square| %>
+            <div id="square-<%= square.id %>" class="square grid-lines <%= squareActive?(square) %>">
+                <span><%= square.phrase.content %></span>
+            </div>
+        <% end %>
+    <% end %>
+</div>

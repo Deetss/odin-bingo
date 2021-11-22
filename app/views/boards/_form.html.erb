@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <%= hidden_field(:board, :user_id, :value => @user_id) %>
+  <%= hidden_field(:board, :user_id, :value => current_user.id) %>
   <div class="actions">
     <%= form.submit %>
   </div>

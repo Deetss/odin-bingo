@@ -2,8 +2,13 @@ class SquaresController < ApplicationController
   
   def activate
     square = Square.find(params[:id])
+    board = Board.find(params[:boardId])
     if square.update(active: !square.active)
-      head :ok
+      if board.touch
+        head :ok
+      else
+        head :bad_request
+      end
     else
       head :unprocessable_entity
     end

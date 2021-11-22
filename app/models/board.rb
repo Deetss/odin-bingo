@@ -1,9 +1,11 @@
 class Board < ApplicationRecord
   belongs_to :user
   has_many :squares, dependent: :delete_all
-
+  
   after_create :generate_board
 
+  default_scope { order(updated_at: :desc) }
+  
   def generate_board
     i = 0
     phrases = Phrase.order("RANDOM()").limit(25)

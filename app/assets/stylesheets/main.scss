@@ -5,7 +5,8 @@
 
 .bingo-container {
     display: grid;
-    height: 75vh;
+    height: 40vh;
+    width: 40vw;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
     border-top: 1px solid black;

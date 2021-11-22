@@ -9,6 +9,7 @@ function toggleActiveSquare(square){
 }
 document.addEventListener("turbolinks:load", function() {
     var squares = document.querySelectorAll('.square') //get squares
+    var boardId = window.location.pathname.replace('/boards/', '')
 
     squares.forEach(square => { //loop over squares
         square.addEventListener("click",function(e){ //add event listener on click to set item as active
@@ -19,13 +20,15 @@ document.addEventListener("turbolinks:load", function() {
                 el = el.parentElement
                 var idNum = el.id.replace('square-', '')
             }
-            var data = new URLSearchParams({id: idNum}).toString()
+            
+            var data = new URLSearchParams({id: idNum, boardId: boardId}).toString()
+
             Rails.ajax({
                 url: "/squares/activate",
                 type: "post",
                 data: data,
                 success: function(data){toggleActiveSquare(el)},
-                error: function(data) {alert("Something went wrong contact Deetss")}
+                error: function(data){alert("Something went wrong contact Deetss on discord")}
             })
             
         })
