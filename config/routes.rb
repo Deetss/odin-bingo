@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :phrases
   resources :boards
+  post 'squares/activate', to: 'squares#activate'
   get 'static_pages/index'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks'}
   resources :users

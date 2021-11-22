@@ -1,9 +1,15 @@
+<%= javascript_pack_tag 'bingo' %>
 <p id="notice"><%= notice %></p>
-<% if @board.squares %>
-    <% @board.squares.each do |square| %>
-        <p><%= square.phrase.content %></p>
-    <% end %>
-<% end %>
-
+<div class="container">
+    <div class="bingo-container w-75">
+        <% if @board.squares %>
+            <% @board.squares.each do |square| %>
+                <div id="square-<%= square.id %>" class="square grid-lines <%= squareActive?(square) %>">
+                    <span><%= square.phrase.content %></span>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
+</div>
 <%= link_to 'Edit', edit_board_path(@board) %> |
 <%= link_to 'Back', boards_path %>

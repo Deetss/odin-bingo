@@ -7,7 +7,7 @@ class Board < ApplicationRecord
   def generate_board
     i = 0
     phrases = Phrase.order("RANDOM()").limit(25)
-    while i < 24
+    while i <= 24
       square = Square.new(board_id: self.id, phrase_id: phrases[i].id, active: false)
       square.save
       i += 1
